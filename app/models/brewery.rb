@@ -1,7 +1,10 @@
 class Brewery < ActiveRecord::Base
   include RatingAverage
 
-	has_many :beers, dependent: :destroy
+  validates :name, presence: true
+  validates :year, inclusion: { in: 1042..2017 }
+
+  has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
 	def print_report
