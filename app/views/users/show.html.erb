@@ -1,9 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<h1>
+  <strong><%= @user.username %></strong>
+</h1>
+
+<o>
+  <% if @user.beer_clubs.empty? %>
+      <% if @user == current_user %>
+          You haven't joined any club yet!
+      <% else %>
+          <%= @user.username %> hasn't joined any club yet!
+      <% end %>
+  <% else %>
+      Member of:
+      <li>
+        <% @user.beer_clubs.each do |club| %>
+            <tr>
+              <td><%= club.name %></td>
+              <td><%= link_to 'Show', club %></td>
+            </tr>
+        <% end %>
+      </li>
+  <% end %>
+</o>
 
 <p>
   <% if @user.ratings.empty? %>
