@@ -35,6 +35,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
+  gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.2'
 end
 
 group :development do
@@ -45,19 +47,13 @@ group :development do
   gem 'spring'
 end
 
-group :development, :test do
-  gem 'sqlite3'
-end
-
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
 
-ruby '2.3.0'
-
-
-group :development, :test do
-  gem 'rspec-rails', '~> 3.5'
+group :test do
+  gem 'factory_girl_rails'
 end
 
+ruby '2.3.1'
