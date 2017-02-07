@@ -15,6 +15,13 @@ FactoryGirl.define do
 
   factory :rating2, class: Rating do
     score 20
+    beer
+    user
+  end
+
+  factory :rating3, class: Rating do
+    score 5
+    beer
   end
 
   factory :brewery do

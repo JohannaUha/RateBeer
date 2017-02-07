@@ -37,4 +37,16 @@ describe "Rating" do
       expect(page).to have_content rating.to_s
     end
   end
+
+  it "lists all user's ratings in user page" do
+    user = FactoryGirl.create :user
+    user = FactoryGirl.create :user
+    FactoryGirl.create :rating, user:user
+    FactoryGirl.create :rating, user:user
+    visit user_path(user)
+    User.first.ratings.each do |rating|
+      expect(page).to have_content rating.to_s
+    end
+  end
+
 end
