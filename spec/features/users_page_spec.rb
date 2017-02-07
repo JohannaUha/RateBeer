@@ -4,7 +4,7 @@ include Helpers
 
 describe "User" do
   before :each do
-    FactoryGirl.create :user
+    FactoryGirl.create :user, username:"Pekka"
   end
 
   describe "who has signed up" do

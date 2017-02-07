@@ -6,7 +6,7 @@ describe "Rating" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
   let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery }
-  let!(:user) { FactoryGirl.create :user }
+  let!(:user) { FactoryGirl.create :user, username:"Pekka" }
 
   before :each do
     visit signin_path
@@ -27,5 +27,14 @@ describe "Rating" do
     expect(user.ratings.count).to eq(1)
     expect(beer1.ratings.count).to eq(1)
     expect(beer1.average_rating).to eq(15.0)
+  end
+
+  it "lists the ratings and their total number" do
+    ratings = FactoryGirl.create_list :rating, 2
+    visit ratings_path
+    expect(page).to have_content "Number of ratings: #{ratings.count}"
+    ratings.each do |rating|
+      expect(page).to have_content rating.to_s
+    end
   end
 end
