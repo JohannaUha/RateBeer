@@ -83,4 +83,42 @@ RSpec.describe User, type: :model do
   end
 
 
+  describe "favorite beer" do
+      let(:user){FactoryGirl.create(:user) }
+    it "not existing means no favourite brewery" do
+      expect(user.favourite_brewery).to eq(nil)
+    end
+
+    it "not existing means no favourite style" do
+      expect(user.favorite_style).to eq(nil)
+    end
+
+    it "'s brewery is favourite if only one beer'" do
+      beer = create_beer_with_rating(user, 10)
+
+      expect(user.favourite_brewery).to eq(beer.brewery.name)
+    end
+
+    it "'s style is favourite if only one beer'" do
+      beer = create_beer_with_rating(user, 10)
+
+      expect(user.favorite_style).to eq(beer.style)
+    end
+
+    it "'s brewery is favourite if best ratings'" do
+      create_beers_with_ratings(user, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating(user, 25)
+
+      expect(user.favourite_brewery).to eq(best.brewery.name)
+    end
+
+    it "'s style is favourite if best ratings'" do
+      create_beers_with_ratings(user, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating(user, 25)
+
+      expect(user.favorite_style).to eq(best.style)
+    end
+  end
+
+
 end
