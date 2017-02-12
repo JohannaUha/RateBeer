@@ -40,13 +40,25 @@ describe "Rating" do
 
   it "lists all user's ratings in user page" do
     user = FactoryGirl.create :user
-    user = FactoryGirl.create :user
     FactoryGirl.create :rating, user:user
     FactoryGirl.create :rating, user:user
     visit user_path(user)
     User.first.ratings.each do |rating|
       expect(page).to have_content rating.to_s
     end
+  end
+
+
+  it "allows deleting ratings" do
+    sign_in(username: "Pekka", password: "Foobar1")
+    brewery = Brewery.create name: "Brewery", year: 2000
+    user = User.first
+    beer = Beer.create name: "Test", style: "Lager", brewery_id: brewery.id
+    Rating.create score: 20, beer_id: beer.id, user_id: user.id
+    visit user_path(user)
+    expect {
+      click_on('delete')
+    }.to change { Rating.count }.by(-1)
   end
 
 end
