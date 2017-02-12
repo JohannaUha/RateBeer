@@ -1,8 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <strong><%= @user.username %></strong>
-</h1>
+<p>
+  <h1>
+    <strong><%= @user.username %></strong>
+  </h1>
+
+  <% if !@user.ratings.empty? %>
+    <i>Likes <%= @user.favourite_brewery %> and enjoys <%= @user.favorite_style %>s the most</i>
+  <% end %>
+</p>
 
 <o>
   <% if @user.beer_clubs.empty? %>
@@ -13,20 +19,24 @@
       <% end %>
   <% else %>
       Member of:
-      <li>
         <% @user.beer_clubs.each do |club| %>
+          <li>
             <tr>
               <td><%= club.name %></td>
               <td><%= link_to 'Show', club %></td>
             </tr>
+          </li>
         <% end %>
-      </li>
   <% end %>
 </o>
 
 <p>
   <% if @user.ratings.empty? %>
-      You haven't rated any beers yet!
+      <% if @user == current_user %>
+          You haven't rated any beers yet!
+      <% else %>
+          <%= @user.username %> hasn't rated any beers yet!
+      <% end %>
   <% else %>
       You have rated <%= pluralize(@user.ratings.size, 'beer') %>, with an average of <%= @user.average_rating %>
   <% end %>
