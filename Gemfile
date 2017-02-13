@@ -59,3 +59,4 @@ group :test do
 end
 
 ruby '2.3.1'
+gem 'httparty'
