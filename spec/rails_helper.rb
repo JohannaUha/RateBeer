@@ -10,6 +10,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 
 require 'helpers'
+require 'webmock/rspec'
+
 
 
 
