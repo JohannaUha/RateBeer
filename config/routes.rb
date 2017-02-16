@@ -12,6 +12,13 @@ Rails.application.routes.draw do
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
 
+  resources :places, only:[:index, :show]
+# mikä generoi samat polut kuin seuraavat kaksi
+# get 'places', to:'places#index'
+# get 'places/:id', to:'places#show'
+
+  post 'places', to:'places#search'
+
   #get 'ratings', to: 'ratings#index'
   #get 'ratings/new', to:'ratings#new'
   #post 'ratings', to: 'ratings#create'

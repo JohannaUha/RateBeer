@@ -6,7 +6,7 @@
   </h1>
 
   <% if !@user.ratings.empty? %>
-    <i>Likes <%= @user.favourite_brewery %> and enjoys <%= @user.favorite_style %>s the most</i>
+    <i>Likes <%= @user.favorite_brewery.name %> and enjoys <%= @user.favorite_style %>s the most</i>
   <% end %>
 </p>
 
