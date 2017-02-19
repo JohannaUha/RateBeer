@@ -30,7 +30,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if Membership.find_by(user_id: @membership.user.id, beer_club_id: @membership.beer_club.id).nil? && @membership.save
-        format.html { redirect_to @membership.beer_club, notice: 'Membership was successfully created.' }
+        format.html { redirect_to @membership.beer_club, notice: 'Welcome to the club!' }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all

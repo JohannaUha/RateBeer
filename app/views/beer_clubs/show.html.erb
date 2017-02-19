@@ -33,7 +33,8 @@
 <% if current_user && !current_user.in_club(@beer_club) %>
   <p>
     <%= form_for(@membership) do |f| %>
-        <%= f.hidden_field :beer_club_id %>
+        <%= f.hidden_field :beer_club_id, :value => @beer_club.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.submit value:"join the club" %>
     <% end %>
   </p>
