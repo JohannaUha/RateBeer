@@ -47,4 +47,8 @@ class User < ActiveRecord::Base
     averages_of_breweries.sort_by{ |b| -b[:rating] }.first[:brewery]
   end
 
+  def in_club(club)
+    beer_clubs.include? club
+  end
+
 end

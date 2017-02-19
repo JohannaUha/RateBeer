@@ -30,6 +30,15 @@
   </tbody>
 </table>
 
+<% if current_user && !current_user.in_club(@beer_club) %>
+  <p>
+    <%= form_for(@membership) do |f| %>
+        <%= f.hidden_field :beer_club_id %>
+        <%= f.submit value:"join the club" %>
+    <% end %>
+  </p>
+<% end %>
+
 
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
 <%= link_to 'Destroy', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %> |
