@@ -47,17 +47,17 @@
       <li>
         <%= r.to_s %> <%
         if @user == current_user %>
-            <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-default' %>
         <% end %>
       </li>
   <% end %>
 </p>
 
 <% if @user == current_user %>
-  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %> |
+    <%= link_to 'Edit', edit_user_path(@user), class:'btn btn-xs btn-warning' %> |
 <% end %>
 
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path, class:'btn btn-xs btn-default' %>
 
 
