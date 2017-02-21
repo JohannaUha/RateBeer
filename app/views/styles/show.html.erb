@@ -1,22 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <%= @style.name %>
-</h2>
 
-<quote>
-  <%= @style.description %>
-</quote>
+<table class="table">
+  <thead>
+    <tr>
+      <th><h2><%= @style.name %></h2></th>
+    </tr>
+  </thead>
 
-<h4>Beers</h4>
+  <tbody>
+    <tr>
+      <th><quote><%= @style.description %></quote></th>
+    </tr>
+  </tbody>
 
-<ul>
+</table>
+
+
+
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><h4>Beers</h4></th>
+      <th><h4>Average</h4></th>
+    </tr>
+  </thead>
+
   <% @style.beers.each do |beer| %>
-      <li>
-        <%= link_to beer, beer %>
-      </li>
+    <tbody>
+      <th><%= link_to beer.name, beer %></th>
+      <th><%=beer.average_rating%></th>
+    </tbody>
   <% end %>
-</ul>
 
-<%= link_to 'Edit', edit_style_path(@style) %>
-<%= link_to 'Delete', @style, method: :delete, data: { confirm: 'Are you sure?' }%>
+</table>
+
+<%= edit_and_destroy_buttons(@style) %>
