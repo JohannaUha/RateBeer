@@ -5,17 +5,24 @@
     <%= submit_tag "Search" %>
 <% end %>
 
-<% if @places %>
+
+
+<% if @places and @places.empty?%>
+    <h4>No locations known...</h4>
+<% elsif @places %>
+    <h4>Places to get your beer</h4>
     <table>
       <thead>
+      <td>name</td>
       <% Place.rendered_fields.each do |f| %>
           <td><%=f %></td>
       <% end %>
       </thead>
       <% @places.each do |place| %>
           <tr>
+            <td><%= link_to place.name, place_path(place.id) %></td>
             <% Place.rendered_fields.each do |f| %>
-                <td><%= link_to place.send(f), "places/#{place.id}" %></td>
+                <td><%= place.send(f) %></td>
             <% end %>
           </tr>
       <% end %>

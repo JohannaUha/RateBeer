@@ -1,55 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <strong><%= @beer_club.name %></strong>
-</h1>
+<h2>
+  <%= @beer_club.name %> <%= @beer_club.city %>
+</h2>
 
 <p>
-  <i>Since: <%= @beer_club.founded %> in <%= @beer_club.city %></i>
+  Founded: <%= @beer_club.founded %>
 </p>
 
-<% if @beer_club.memberships.empty? %>
-    <p>
-      Beer Club doesn't have any members yet!
-    </p>
-<% else %>
-  <table>
-    <thead>
-    <tr>
-      <th>Members</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-    <tbody>
+<% if @beer_club.members.any? %>
+    <ul>
       <% @beer_club.members.each do |member| %>
-          <tr>
-            <td><%= link_to member.username, member %></td>
-          </tr>
+          <li>
+            <%= link_to member.username, member %>
+          </li>
       <% end %>
+    </ul>
+<% else %>
+    <p>no members</p>
 <% end %>
-  </tbody>
-</table>
 
-<% if current_user && !current_user.in_club(@beer_club) %>
-  <p>
-    <%= form_for(@membership) do |f| %>
-        <%= f.hidden_field :beer_club_id, :value => @beer_club.id %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.submit value:"join the club" %>
+<% if current_user %>
+    <% if current_user.is_member_of? @beer_club %>
+        <%= form_for(@membership, method: "delete") do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value: "end the membership" %>
+        <% end %>
+    <% else %>
+        <%= form_for(@membership) do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value:"join the club" %>
+        <% end %>
     <% end %>
-  </p>
-<% end %>
 
-<% if current_user && current_user.in_club(@beer_club) %>
-    <p>
-      <%= form_for(@membership, method: "delete") do |f| %>
-          <%= f.hidden_field :beer_club_id %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.submit value: "end membership" %>
-      <% end %>
-    </p>
+    <%= link_to 'Edit', edit_beer_club_path(@beer_club) %>
+    <%= link_to 'Destroy', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
-<%= link_to 'Destroy', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', beer_clubs_path %>

@@ -1,13 +1,11 @@
 class BeermappingApi
-
   def self.places_in(city)
     city = city.downcase
-    Rails.cache.fetch(city, expires_in:7.days) { fetch_places_in(city) }
+    Rails.cache.fetch(city, expires_in: 1.week) { fetch_places_in(city) }
   end
 
-  def self.place_where_id(id, city)
-    paikat = places_in(city)
-    paikat.find{|p| p.id == id}
+  def self.place_in(city, id)
+    places_in(city).find{ |p| p.id == id }
   end
 
   private
@@ -28,5 +26,6 @@ class BeermappingApi
 
   def self.key
     raise "APIKEY env variable not defined" if ENV['APIKEY'].nil?
-    ENV['APIKEY']  end
+    ENV['APIKEY']
+  end
 end
