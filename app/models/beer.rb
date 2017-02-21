@@ -16,4 +16,9 @@ class Beer < ActiveRecord::Base
   def average
     ratings.map{ |r| r.score }.sum / ratings.count.to_f
   end
+
+  def self.top(n)
+    sorted = Beer.all.sort_by{ |b| -(b.average_rating||0) }
+    sorted.take(n)
+  end
 end

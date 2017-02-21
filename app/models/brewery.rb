@@ -6,6 +6,9 @@ class Brewery < ActiveRecord::Base
                                    less_than_or_equal_to: Proc.new { Time.now.year },
                                    only_integer: true }
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
+
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
@@ -20,5 +23,8 @@ class Brewery < ActiveRecord::Base
     puts "changed year to #{year}"
   end
 
-
+  def self.top(n)
+    sorted = Brewery.all.sort_by{ |b| -(b.average_rating||0) }
+    sorted.take(n)
+  end
 end

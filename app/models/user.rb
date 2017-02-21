@@ -51,4 +51,9 @@ class User < ActiveRecord::Base
   def is_member_of?(beer_club)
     beer_clubs.include? beer_club
   end
+
+  def self.topRaters(n)
+    sorted = User.all.sort_by{ |b| -(b.ratings.count||0) }
+    sorted.take(n)
+  end
 end
