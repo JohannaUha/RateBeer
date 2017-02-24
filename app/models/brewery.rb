@@ -27,4 +27,6 @@ class Brewery < ActiveRecord::Base
     sorted = Brewery.all.sort_by{ |b| -(b.average_rating||0) }
     sorted.take(n)
   end
+
+
 end

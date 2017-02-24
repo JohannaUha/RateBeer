@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :beer_clubs
   resources :users
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
 
   root 'breweries#index'
   get 'signup', to: 'users#new'

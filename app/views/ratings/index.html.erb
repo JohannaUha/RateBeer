@@ -19,7 +19,7 @@
         <% @beers.each do |beer| %>
             <tr>
               <td><%= link_to beer.name, beer %></td>
-              <td><%= beer.average_rating %></td>
+              <td><span class="badge"><%= beer.average_rating %></span></td>
             </tr>
         <% end %>
         </tbody>
@@ -38,7 +38,7 @@
         <% @breweries.each do |brewery| %>
             <tr>
               <td><%= link_to brewery.name, brewery %></td>
-              <td><%= brewery.average_rating %></td>
+              <td><span class="badge"><%= brewery.average_rating %></span></td>
             </tr>
         <% end %>
         </tbody>
@@ -57,7 +57,7 @@
         <% @styles.each do |style| %>
             <tr>
               <td><%= link_to style.name, style %></td>
-              <td><%= style.average_rating %></td>
+              <td><span class="badge"><%= style.average_rating %></span></td>
             </tr>
         <% end %>
         </tbody>
