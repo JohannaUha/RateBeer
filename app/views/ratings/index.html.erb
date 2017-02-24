@@ -84,9 +84,15 @@
   <% @raters.each do |rater| %>
       <tr>
         <td><%= link_to rater.username, rater %></td>
-        <td><%= link_to rater.favorite_beer.name, rater.favorite_beer %></td>
-        <td><%= link_to rater.favorite_style, rater.favorite_style %></td>
-        <td><%= link_to rater.favorite_brewery.name, rater.favorite_brewery %></td>
+        <% if rater.favorite_beer %>
+          <td><%= link_to rater.favorite_beer.name, rater.favorite_beer %></td>
+        <% end %>
+        <% if rater.favorite_style %>
+          <td><%= link_to rater.favorite_style, rater.favorite_style %></td>
+        <% end %>
+        <% if rater.favorite_brewery %>
+          <td><%= link_to rater.favorite_brewery.name, rater.favorite_brewery %></td>
+         <% end %>
         <td><%= rater.ratings.count %></td>
       </tr>
   <% end %>
