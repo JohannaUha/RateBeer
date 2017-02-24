@@ -10,6 +10,16 @@
   <% end %>
 </p>
 
+<p>
+  <% if current_user and current_user.admin? %>
+    <% if @user.freedom? %>
+      <%= link_to "Freeze user", toggle_freedom_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+    <% else %>
+        <%= link_to "Unfreeze user", toggle_freedom_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</p>
+
 <o>
   <% if @user.beer_clubs.empty? %>
       <% if @user == current_user %>

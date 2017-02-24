@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_admin, only: [:toggle_freedom]
 
   # GET /users
   # GET /users.json
@@ -59,6 +60,15 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_freedom
+    user = User.find(params[:id])
+    user.update_attribute :freedom, (not user.freedom)
+
+    new_status = user.freedom? ? "unfrozen" : "frozen"
+
+    redirect_to :back, notice:"user #{new_status}"
   end
 
   private
