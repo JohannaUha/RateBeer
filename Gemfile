@@ -64,4 +64,5 @@ ruby '2.3.1'
 gem 'httparty'
 gem 'jquery-turbolinks'
 gem 'rack-mini-profiler'
+gem 'sucker_punch', '~> 2.0'
 

@@ -9,4 +9,8 @@ class Rating < ActiveRecord::Base
   def to_s
     "#{beer.name} #{score}"
   end
+
+  def self.top(n)
+    Rating.take(n)
+  end
 end
